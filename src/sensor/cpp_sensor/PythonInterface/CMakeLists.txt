@@ -23,8 +23,6 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../utility/pybind11"
 #------------------------------------------------------------------------------
 project(SENSOR_Python)
 
-SET(OpenCV_DIR "E:/OpenCV/build/3.4.1_x64")
-
 # Get the source files
 file(GLOB SENSOR_SOURCES "../src/*.cpp")
 # Get the header files
@@ -34,8 +32,13 @@ file(GLOB SENSOR_HEADERS "../inc/*.h")
 file(GLOB PY_INTERFACE_FILES "*.cpp" "*.h")
 source_group(PythonIterface FILES ${PY_INTERFACE_FILES})
 
-find_package(Boost REQUIRED)
+# On Windows, OpenCV is not always found by default, so look in the environment
+# variables for OpenCV_DIR
+if(DEFINED $ENV{OpenCV_DIR})
+	SET(OpenCV_DIR $ENV{OpenCV_DIR})
+endif()
 find_package(OpenCV REQUIRED)
+find_package(Boost REQUIRED)
 
 # Numpy headers needed for opencv Mat conversion from numpy arrays
 get_filename_component(PYTHON_SCRIPT_PATH ${PYTHON_EXECUTABLE} DIRECTORY)

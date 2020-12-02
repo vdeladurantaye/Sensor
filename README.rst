@@ -1,9 +1,9 @@
 Sensor
 ======
-This project contains the C++ code for segmenting images like ODLM, using grayscale pixel data. A simple Python interface is provided, it could easily be modified to access more data from the C++ code.
+This project contains the code for reproducing my PhD thesis. The core code is in C++ but there is a Python interface created with Pybind11.
 
 Prerequisites
-------------
+-------------
 - OpenCV
 - Python
 - Cmake: Used for cross-platform project generation
@@ -17,8 +17,18 @@ Prerequisites
 	- Place in *utility/gtest*
 
 
-Generate the projects using Cmake
----------------------------------
+Running Sensor from Python
+--------------------------
+A simple Python interface made using Pybind11, it could easily be modified to access more data from the C++ code.
+
+Setting up a development environment
+------------------------------------
+To set up a virtual development environment where modifications are not propagated to the main Python installation, this project uses tox: https://tox.readthedocs.io.
+
+To install the virtual environment, simply type tox in the terminal
+
+Generate the C++ projects using Cmake
+-------------------------------------
 1. Set the source code folder to the Sensor directory.
 2. Set the binaries folder to where you want Cmake to generate the project, typically set as a *./build* folder in the Sensor directory.
 3. Click "Configure" and Cmake will attempt to configure the project, however some paths might need to be manually configured

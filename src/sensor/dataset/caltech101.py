@@ -19,16 +19,10 @@ class Caltech101():
     """
     Caltech101
 
-    Reference:
-    Gray et al. Evaluating appearance models for recognition, reacquisition,
-    and tracking. PETS 2007.
+    Pictures of objects belonging to 101 categories. About 40 to 800 images 
+    per category. Most categories have about 50 images.
 
-    URL: https://vision.soe.ucsc.edu/node/178
-
-    Dataset statistics:
-    # identities: 632
-    # images: 632 x 2 = 1264
-    # cameras: 2
+    URL: http://www.vision.caltech.edu/Image_Datasets/Caltech101/
     """
     dataset_dir = 'caltech101'
 
@@ -55,7 +49,11 @@ class Caltech101():
         self.test_pairs_filepath = osp.join(self.dataset_dir,
                                             test_pairs_filename)
 
-        self._download_data()
+        # Caltech101 files URL now redirect to Google Drive, which broke the 
+        # download code in _download_data(). Caltech101 files should be manually
+        # downloaded and extracted until _download_data() is modified to handle
+        # downloading files from Google Drive.
+        #self._download_data()
 
         self._load()
 
@@ -183,14 +181,14 @@ class Caltech101():
         Load the test pairs.
         """
         if not osp.exists(self.dataset_dir):
-            raise RuntimeError(
-                "'{}' is not available".format(self.dataset_dir))
+            raise FileNotFoundError(
+                "'{}' is not found".format(self.dataset_dir))
         if not osp.exists(self.dataset_path):
-            raise RuntimeError(
-                "'{}' is not available".format(self.dataset_path))
+            raise FileNotFoundError(
+                "'{}' is not found".format(self.dataset_path))
         if not osp.exists(self.annotation_path):
-            raise RuntimeError(
-                "'{}' is not available".format(self.annotation_path))
+            raise FileNotFoundError(
+                "'{}' is not found".format(self.annotation_path))
 
         if not osp.exists(self.test_pairs_filepath):
             self._prepare_test_pairs(self.nb_pairs, self.nb_categories)

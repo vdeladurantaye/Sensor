@@ -49,8 +49,13 @@ file(GLOB SENSOR_HEADERS "../inc/*.h")
 file(GLOB SENSOR_TESTS *.cpp *.h)
 source_group(Tests "test_*")
 
-
+# On Windows, OpenCV is not always found by default, so look in the environment
+# variables for OpenCV_DIR
+if(DEFINED $ENV{OpenCV_DIR})
+	SET(OpenCV_DIR $ENV{OpenCV_DIR})
+endif()
 find_package(OpenCV REQUIRED)
+find_package(Boost REQUIRED)
 
 # Define include directories
 include_directories("../inc")

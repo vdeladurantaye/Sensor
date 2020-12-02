@@ -1,0 +1,7 @@
+graft src/sensor/cpp_sensor/inc
+graft src/sensor/cpp_sensor/src
+graft src/sensor/cpp_sensor/PythonInterface
+
+include src/sensor/cpp_sensor/utility/cmake-dl/pybind11/CMakeLists.txt
+
+global-exclude __pycache__
